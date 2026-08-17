@@ -1,5 +1,12 @@
 # HealthCareOps: Building an End-to-End Healthcare Operational Analytics Platform
 
+**A full Medallion-architecture data platform for a simulated South African hospital network, built end-to-end on Databricks Free Edition — from raw synthetic EMR data through a governed star schema to two BI layers and a natural-language query agent.**
+
+- 🏗️ **Bronze → Silver → Gold** on Unity Catalog + Delta Lake, with a root-caused dimensional key design (deterministic `md5()` surrogate keys, validated with left-anti joins — not name-based workarounds)
+- 🔄 **Daily incremental pipeline** with genuine record lifecycles — SCD Type 2 for patients, CDC-style update-in-place for admissions, beds, and resources
+- 📊 **Two BI layers** — a native Databricks SQL dashboard and a Power BI report (Fabric Experience) with dedicated DAX measures across four report pages
+- 🤖 **Natural-language querying** via Databricks Genie, grounded with explicit schema and business-logic instructions
+
 ## Project Scenario
 
 This project simulates a South African (Gauteng/Tshwane) multi-facility hospital network — seven facilities spanning academic/tertiary, public district, and private hospitals — that needs a unified analytics platform to answer operational and population-health questions across patient care, bed capacity, staffing/equipment allocation, and admissions patterns.
