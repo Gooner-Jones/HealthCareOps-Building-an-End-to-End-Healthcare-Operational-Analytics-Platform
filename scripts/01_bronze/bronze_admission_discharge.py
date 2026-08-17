@@ -26,7 +26,7 @@ doctor_roster_df = spark.read.table("hospital_analytics.03_gold.dim_doctor").sel
 DOCTOR_IDS = [row["doctor_id"] for row in doctor_roster_df.collect()]
 
 # ============================================================
-# REFERENCE DATA 
+# REFERENCE DATA (WARD_CAPACITIES added)
 # ============================================================
 FACILITIES = [
     "Steve Biko Academic Hospital", "Kalafong Provincial Tertiary Hospital",
@@ -50,11 +50,27 @@ DISCHARGE_WEIGHTS  = [0.60, 0.12, 0.05, 0.04, 0.15, 0.04]
 
 SOURCE_SYSTEMS     = ["MedTech EMR", "GoodX", "Healthware", "Nexus EMR", "Paper-Digitised"]
 
-WARD_KEYS          = [
-    "Casualty", "ICU", "General Medical", "Surgical", "Paediatrics",
-    "Maternity", "Oncology", "Orthopaedics", "Psychiatry", "Cardiology",
-    "Isolation / Infectious Disease", "Outpatient"
-]
+WARD_CAPACITIES = {
+    "Casualty": 30, "ICU": 12, "General Medical": 60, "Surgical": 40,
+    "Paediatrics": 35, "Maternity": 40, "Oncology": 25, "Orthopaedics": 30,
+    "Psychiatry": 30, "Cardiology": 20, "Isolation / Infectious Disease": 20,
+    "Outpatient": 50,
+}
+WARD_KEYS = list(WARD_CAPACITIES.keys())
+
+MONTH_WEIGHTS = {1:1.0,2:1.0,3:1.0,4:1.0,5:1.0,6:1.5,7:1.5,8:1.0,9:1.0,10:1.0,11:1.0,12:1.0}
+
+def random_date_with_seasonality(start_date, end_date, month_weights):
+    days_list    = [start_date + timedelta(days=i) for i in range((end_date - start_date).days + 1)]
+    date_weights = [month_weights.get(d.month, 1.0) for d in days_list]
+    return random.choices(days_list, weights=date_weights, k=1)[0]
+
+doctor_roster_df = spark.read.table("hospital_analytics.03_gold.dim_doctor").select("doctor_id")
+DOCTOR_IDS = [row["doctor_id"] for row in doctor_roster_df.collect()]
+
+patient_df   = spark.read.table("hospital_analytics.01_bronze.patient_info").select("patient_id", "primary_diagnosis")
+patient_dict = {row["patient_id"]: row["primary_diagnosis"] for row in patient_df.collect()}
+patient_ids  = list(patient_dict.keys())
 
 # ============================================================
 # SEASONALITY 
