@@ -26,8 +26,8 @@ doctor_roster_df = spark.read.table("hospital_analytics.03_gold.dim_doctor").sel
 DOCTOR_IDS = [row["doctor_id"] for row in doctor_roster_df.collect()]
 
 # ============================================================
-# CELL 2 — REFERENCE DATA (complete — network-wide ward
-# capacities, plus everything else this cell originally defined)
+# REFERENCE DATA (complete — network-wide ward
+# capacities)
 # ============================================================
 FACILITIES = [
     "Steve Biko Academic Hospital", "Kalafong Provincial Tertiary Hospital",
@@ -106,13 +106,7 @@ MONTHLY_CAPS = {
 }
 
 # ============================================================
-# CELL 3 — PHASE 1: Generate admission/discharge DATES
-# (fixed: replaced the unconditional 30%-never-discharged branch
-# with a proper LOS distribution. The old logic created ~2,400
-# permanently-active patients against only 392 total system-wide
-# beds — mathematically impossible for any assignment algorithm
-# to satisfy. A patient is now only "still active" if their
-# (realistic) length of stay genuinely hasn't concluded by today.)
+# PHASE 1: Generate admission/discharge DATES
 # ============================================================
 today_date     = date.today()
 ingestion_ts   = datetime.now()
@@ -186,7 +180,7 @@ print(f"✅ Generated {len(raw_events):,} admission date-ranges after {attempts:
 print(f"ℹ️  Still active as of today: {still_active_count:,} (was ~2,400 under the old logic — should be well under 392 total system capacity now)")
 
 # ============================================================
-# CELL 4 — PHASE 2: Capacity-aware ward assignment
+# PHASE 2: Capacity-aware ward assignment
 # Processes admissions in chronological order (by admission_date),
 # tracking active (undischarged) intervals per ward, and only
 # assigns a ward if it has capacity for the interval's duration.
@@ -255,7 +249,7 @@ for ward, (peak, cap) in max_overage.items():
 
 
 # ============================================================
-# CELL 5 — PHASE 3: Fill in remaining fields & write to Bronze
+# PHASE 3: Fill in remaining fields & write to Bronze
 # ============================================================
 admission_schema = StructType([
     StructField("admission_id",          StringType(),  False),
