@@ -1,5 +1,5 @@
 # ============================================================
-# BUILD dim_facility
+# CELL 1 : BUILD dim_facility
 # ============================================================
 from pyspark.sql.functions import col, md5
 
@@ -47,7 +47,7 @@ print(f"✅ dim_facility written: {dim_facility.count()} facilities")
 dim_facility.show(truncate=False)
 
 # ============================================================
-# VALIDATE against every Silver table with a facility reference
+# CELL 2 : VALIDATE against every Silver table with a facility reference
 # ============================================================
 dim_facility_check = spark.read.table("hospital_analytics.03_gold.dim_facility")
 
