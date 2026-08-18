@@ -1,5 +1,5 @@
 # ============================================================
-# BUILD dim_diagnosis
+# CELL 1 : BUILD dim_diagnosis
 # Canonical diagnosis list (from Bronze reference data),
 # diagnosis_sk derived deterministically from diagnosis name.
 # ============================================================
@@ -70,7 +70,7 @@ print(f"✅ dim_diagnosis written: {dim_diagnosis.count()} diagnoses")
 dim_diagnosis.show(truncate=False)
 
 # ============================================================
-# VALIDATE against every Silver table with a diagnosis reference
+# CELL 2 : VALIDATE against every Silver table with a diagnosis reference
 # ============================================================
 dim_diagnosis_check = spark.read.table("hospital_analytics.03_gold.dim_diagnosis")
 
