@@ -192,7 +192,7 @@ Example Questions the Genie Agent Can Answer:
 
 Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
 
-https://Genie_Diagnosis_Groups.jpg
+[https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
 
 🏗️ Architecture and Orchestration
 The entire pipeline is orchestrated through Databricks Workflows.
