@@ -143,34 +143,84 @@ dim_diagnosis (primary + secondary) ── fact_patient_demographics ── dim_
 Every dimension and fact table was validated immediately after creation via left-anti join checks against its Silver source(s), confirming zero unmatched foreign keys before moving to the next build step.
 
 
-# 📊 Power BI Report: Admissions Overview
-This page delivers a high-level view of patient flow, highlighting trends and resource demands.
+📊 Power BI Report: Admissions Overview
+This page delivers a high-level view of patient flow, highlighting trends and resource demands across the hospital network.
 
-[https://images/admissions_overview.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/images/admissions_overview.jpg)
+https://images/admissions_overview.png
 
 Key Metrics (Card Visuals):
 
-Total Admissions: 1,264
+Total Admissions: 8,000
 
-Readmission Rate: 83.7% (A significant indicator of care quality and/or patient complexity)
+Readmission Rate: 83.65% (A significant indicator of care quality and/or patient complexity)
 
-Weekend Admission %: 27.6%
+Weekend Admission %: 28.23%
 
-Avg Length of Stay: 7.6 Days
+Avg Length of Stay: 7.55 Days
 
 Key Visuals & Insights:
 
-Admissions Trend: A monthly bar chart shows total admissions peaking in August at over 200. The ICU admissions trend line follows a similar pattern, peaking at approximately 25 admissions in August.
+Admissions Trend
+Total Admissions: The monthly bar chart shows total admissions trending upward from February through August, with a notable peak in August at approximately 1,400 admissions.
 
-Admissions by Ward: The General Medical ward handles the highest volume (~500 admissions), followed by Outpatient (~320) and Maternity (~175).
+ICU Admissions: ICU admissions follow a similar seasonal pattern but at a significantly lower volume, with the highest month reaching approximately 180 admissions.
 
-Diagnosis Group Analysis: A horizontal bar chart reveals the top diagnoses. Infectious Disease (314 cases) and Cardiovascular (160) are the leading reasons for admission, together accounting for nearly 40% of all cases.
+Total Admissions by Ward Name
+Ward	Admissions
+General Medical	~2,200
+Outpatient	~1,400
+Maternity	~900
+Paediatrics	~700
+Cardiology	~500
+Surgical	~450
+Orthopaedics	~350
+ICU	~250
+Casualty	~200
+Total Admissions by Diagnosis Group
+The diagnosis distribution shows a concentration in infectious disease and cardiovascular conditions, which together represent nearly 40% of all hospital admissions:
 
-Admission Type: Emergency admissions dominate at nearly 75% of all cases, indicating high acuity and demand on emergency services.
+Infectious Disease: ~2,040 admissions (25.5%)
 
-Length of Stay Distribution: Medium-stay admissions (4-7 days) are the most common at 496 cases, followed by short-stay (2-3 days) at 273 cases.
+Cardiovascular: ~1,120 admissions (14.0%)
 
-Readmission Rate by Facility: The readmission rate is consistently high across most facilities, hovering between 80% and 87%, indicating a systemic issue or a high-risk patient population across the network.
+Mental Health: ~850 admissions (10.6%)
+
+Gastrointestinal: ~810 admissions (10.1%)
+
+Trauma: ~775 admissions (9.7%)
+
+Obstetric/Neonatal: ~775 admissions (9.7%)
+
+Remaining Groups: Haematological, Endocrine/Metabolic, Renal, Respiratory (collectively ~20.5%)
+
+Total Admissions by Admission Type
+Emergency: ~5,600 admissions (70%)
+
+Elective: ~2,400 admissions (30%)
+
+Length of Stay Distribution
+LOS Category	Admissions	Avg LOS (Days)
+Medium Stay (4-7 days)	~3,200	5.5
+Short Stay (2-3 days)	~1,800	2.4
+Long Stay (8-14 days)	~1,000	10.7
+Extended Stay (15+ days)	~1,100	25.5
+Same Day	~900	0.8
+Readmission Rate by Facility
+Readmission rates are consistently high across all seven facilities, ranging from 80% to 87%, suggesting either systemic care quality issues or a predominantly high-risk patient population across the network:
+
+Little Company of Mary Hospital: 87%
+
+Mediclinic Kloof: 87%
+
+Tshwane District Hospital: 84%
+
+Unitas Hospital: 84%
+
+Steve Biko Academic Hospital: 82%
+
+Netcare Montana Hospital: 82%
+
+Kalafong Provincial Tertiary Hospital: 80%
 
 # 📊 Power BI Report: Resource Allocation
 This page provides visibility into how efficiently staff, equipment, and consumables are deployed across the network.
