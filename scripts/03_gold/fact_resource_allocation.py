@@ -1,5 +1,5 @@
 # ============================================================
-# fact_resource_allocation
+# CELL 1 : fact_resource_allocation
 # ============================================================
 from pyspark.sql.functions import col, md5, date_format, when
 
@@ -34,7 +34,7 @@ fact_resource_allocation.write.format("delta").mode("overwrite").option("overwri
 print(f"✅ fact_resource_allocation written: {fact_resource_allocation.count():,} rows")
 
 # ============================================================
-# VALIDATE
+# CELL 2 : VALIDATE
 # ============================================================
 dim_ward     = spark.read.table("hospital_analytics.03_gold.dim_ward").select(col("ward_sk"))
 dim_facility = spark.read.table("hospital_analytics.03_gold.dim_facility").select(col("facility_sk"))
