@@ -301,3 +301,10 @@ Steps 3 and 7 run in parallel, as do their downstream branches — both only dep
   - Power BI (Fabric Experience) — connected via the Databricks connector; four report pages (Admissions, Bed Utilisation, Resource Allocation, Population Health) with dedicated DAX measure sets, validated `*:1` fact-to-dimension relationships, and `dim_date` marked as a proper Date table for time intelligence; published within the Fabric Experience
   - Databricks Genie (Genie Agent) — natural-language querying directly over the Gold layer, grounded with explicit schema, calculation, and business-definition instructions
 - **Key architectural principle carried through the whole build:** fix data-quality and modeling defects at their source layer, derive dimensional keys deterministically rather than assigning them independently, and treat every dimension/fact join as something to be validated with an actual query — not assumed correct.
+
+# About Me
+Hi, I'm Neo Jones — a Microsoft Certified Fabric Analytics Engineer Associate with a growing passion for data engineering. I thrive on solving real-world problems using SQL, and I'm especially excited about the capabilities of Microsoft Fabric and Databricks. From building data pipelines to exploring insights in the Lakehouse, I enjoy every part of working with data inside this evolving ecosystem.
+
+This portfolio reflects my journey into the tech field, showcasing my hands-on projects, SQL skills, and curiosity-driven learning. Outside of work and code, I’m a proud single dad and a lifelong Arsenal supporter (yes, even through the tough seasons! But we are CHAMPIONS!!).
+
+Thanks for checking out my work — let’s build something great with data.
