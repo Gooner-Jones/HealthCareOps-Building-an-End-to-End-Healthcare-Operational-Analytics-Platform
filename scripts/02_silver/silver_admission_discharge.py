@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ BRONZE
+# CELL 1 : SETUP & READ BRONZE
 # ============================================================
 from pyspark.sql.functions import (
     col, when, datediff, year, month, quarter,
@@ -10,7 +10,7 @@ from pyspark.sql.functions import (
 bronze_adm_df = spark.read.format("delta").table("hospital_analytics.01_bronze.admission_discharge")
 
 # ============================================================
-# SILVER TRANSFORMATIONS 
+# CELL 2 : SILVER TRANSFORMATIONS 
 # ============================================================
 silver_adm_df = (
     bronze_adm_df
@@ -112,7 +112,7 @@ silver_adm_df = silver_adm_df.dropDuplicates(
 )
 
 # ============================================================
-# QUARANTINE SPLIT & WRITE
+# CELL 3 : QUARANTINE SPLIT & WRITE
 # ============================================================
 quarantine_df  = silver_adm_df.filter(col("data_quality_flag").startswith("FAIL"))
 clean_df       = silver_adm_df.filter(~col("data_quality_flag").startswith("FAIL"))
