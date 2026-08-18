@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
+# CELL 1 : SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
 # ============================================================
 from pyspark.sql.functions import (
     col, when, datediff, year, month, quarter,
@@ -20,8 +20,7 @@ inc_raw_df = (
 print(f"📥 Incremental Bronze records for {load_date}: {inc_raw_df.count():,}")
 
 # ============================================================
-# CELL 2 — SILVER TRANSFORMATIONS (same logic as the original
-# full-load Silver script — every incremental record must go
+# CELL 2 : SILVER TRANSFORMATIONS (every incremental record must go
 # through identical transformation, or schemas/logic will drift)
 # ============================================================
 silver_adm_df = (
@@ -110,7 +109,7 @@ silver_adm_df = (
 silver_adm_df = silver_adm_df.dropDuplicates(["admission_id"])
 
 # ============================================================
-# QUARANTINE SPLIT
+# CELL 3 : QUARANTINE SPLIT
 # ============================================================
 quarantine_df = silver_adm_df.filter(col("data_quality_flag").startswith("FAIL"))
 clean_df      = silver_adm_df.filter(~col("data_quality_flag").startswith("FAIL"))
@@ -126,7 +125,7 @@ print(f"⚠️  Quarantine records : {quarantine_df.count():,}")
 )
 
 # ============================================================
-# UPSERT INTO SILVER (not SCD2 — plain merge on admission_id)
+# CELL 4 : UPSERT INTO SILVER (not SCD2 — plain merge on admission_id)
 # Existing admission_ids get updated (discharge info arrived);
 # new admission_ids get inserted.
 # ============================================================
