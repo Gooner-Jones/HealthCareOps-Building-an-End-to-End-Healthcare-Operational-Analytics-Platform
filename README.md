@@ -41,6 +41,7 @@ The Gold layer is built on a star schema to enable fast, flexible reporting. A k
 Star Schema Overview
 
 
+<img width="4108" height="904" alt="deepseek_mermaid_20260818_1f67ba" src="https://github.com/user-attachments/assets/f58a4c5a-7034-423d-843b-6fe8a8b406b5" />
 
 
 
@@ -188,7 +189,7 @@ Business Definitions: What constitutes a "high-risk comorbidity" (e.g., HIV/AIDS
 
 "What are the top 5 resource types by assignment volume?"
 
-# Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
+### Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
 
 [https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
 
