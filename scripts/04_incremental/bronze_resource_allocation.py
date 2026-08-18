@@ -1,5 +1,5 @@
 # ============================================================
-# incremental_resource_allocation_bronze
+# CELL 1 : incremental_resource_allocation_bronze
 # ============================================================
 %pip install faker
 
@@ -60,7 +60,7 @@ patient_ids = [row["patient_id"] for row in
                spark.read.table(bronze_patient_table).select("patient_id").collect()]
 
 # ============================================================
-# PART 1: RELEASE A PORTION OF CURRENTLY ASSIGNED RESOURCES
+# CELL 2 : PART 1: RELEASE A PORTION OF CURRENTLY ASSIGNED RESOURCES
 # (MERGE update)
 # ============================================================
 delta_res = DeltaTable.forName(spark, bronze_res_table)
@@ -117,7 +117,7 @@ else:
     print("ℹ️  No resources released today.")
 
 # ============================================================
-# PART 2: NEW RESOURCE ASSIGNMENTS (append)
+# CELL 3 : PART 2: NEW RESOURCE ASSIGNMENTS (append)
 # ============================================================
 NUM_NEW_ASSIGNMENTS = 400
 
