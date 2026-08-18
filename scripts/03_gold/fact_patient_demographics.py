@@ -1,5 +1,5 @@
 # ============================================================
-# fact_patient_demographics
+# CELL 1 : fact_patient_demographics
 # ============================================================
 from pyspark.sql.functions import col, md5, when
 
