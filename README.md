@@ -87,31 +87,6 @@ Length of Stay Distribution: Medium-stay admissions (4-7 days) are the most comm
 
 Readmission Rate by Facility: The readmission rate is consistently high across most facilities, hovering between 80% and 87%, indicating a systemic issue or a high-risk patient population across the network.
 
-# 📊 Power BI Report: Bed Utilisation Overview
-This page provides visibility into bed capacity and occupancy patterns across the hospital network.
-
-Key Metrics (Card Visuals):
-
-Total Bed Assignments: 35K
-
-Currently Occupied: 12.3K
-
-Avg Bed LOS: 10.35 Days
-
-Bed Occupancy Rate: 448% (Note: This metric requires grouping by ward to be meaningful, as a hospital-wide average can exceed 100% when summing multiple wards.)
-
-Key Visuals & Insights:
-
-Bed Occupancy Rate by Ward: A horizontal bar chart shows that ICU, Cardiology, and Isolation/Infectious wards are operating at the highest occupancy rates, all exceeding 600%. This highlights critical capacity constraints in specialised care units.
-
-Bed Assignment Distribution: A donut chart shows that 64.98% of beds are occupied, while 35.02% are available.
-
-Average Bed LOS by Ward: Outpatient wards have the highest average bed LOS at 11.30 days, followed by Paediatrics at 10.78 days.
-
-Total Bed Assignments by Bed Type: General Ward Bed accounts for the majority of assignments at approximately 12K, followed by High Care Bed at roughly 10K.
-
-Monthly Bed Occupancy Rate: The occupancy rate shows a steady upward trend from February (around 80%) to a peak in August (nearly 300%), indicating increasing pressure on bed capacity over time.
-
 # 📊 Power BI Report: Resource Allocation
 This page provides visibility into how efficiently staff, equipment, and consumables are deployed across the network.
 
@@ -189,9 +164,9 @@ Business Definitions: What constitutes a "high-risk comorbidity" (e.g., HIV/AIDS
 
 "What are the top 5 resource types by assignment volume?"
 
-### Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
+Genie chat output: [https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
 
-[https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
+### Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
 
 # 🏗️ Architecture and Orchestration
 The entire pipeline is orchestrated through Databricks Workflows.
