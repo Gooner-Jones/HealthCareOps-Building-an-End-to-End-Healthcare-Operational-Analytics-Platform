@@ -1,5 +1,5 @@
 # ============================================================
-# incremental_resource_allocation_silver
+# CELL 1 : incremental_resource_allocation_silver
 # ============================================================
 from pyspark.sql.functions import col, when, trim, datediff, current_date, lit
 
@@ -95,7 +95,7 @@ print(f"⚠️  Quarantine records : {quarantine_df.count():,}")
 quarantine_df.write.format("delta").mode("append").saveAsTable("hospital_analytics.quarantine.resource_allocation")
 
 # ============================================================
-# UPSERT INTO SILVER
+# CELL 2 : UPSERT INTO SILVER
 # ============================================================
 from delta.tables import DeltaTable
 
