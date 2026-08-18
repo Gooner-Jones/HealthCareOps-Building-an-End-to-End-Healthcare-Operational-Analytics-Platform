@@ -1,5 +1,5 @@
 # ============================================================
-# fact_admissions
+# CELL 1 : fact_admissions
 # ============================================================
 from pyspark.sql.functions import col, md5, date_format, when
 
@@ -7,8 +7,10 @@ adm_df = spark.read.table("hospital_analytics.02_silver.admission_discharge")
 
 fact_admissions = (
     adm_df
-    .withColumn("patient_sk",           # ============================================================
-# VALIDATE — confirm every foreign key resolves against its dimension
+    .withColumn("patient_sk",          
+
+# ============================================================
+# CELL 2 : VALIDATE — confirm every foreign key resolves against its dimension
 # ============================================================
 dim_ward       = spark.read.table("hospital_analytics.03_gold.dim_ward")
 dim_diagnosis  = spark.read.table("hospital_analytics.03_gold.dim_diagnosis")
