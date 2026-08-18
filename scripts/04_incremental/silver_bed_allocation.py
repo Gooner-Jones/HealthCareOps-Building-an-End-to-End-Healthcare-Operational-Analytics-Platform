@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
+# CELL 1 : SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
 # ============================================================
 from pyspark.sql.functions import col, when, trim, datediff, current_date, lit
 from delta.tables import DeltaTable
@@ -17,8 +17,7 @@ print(f"📥 Incremental Bronze records for {load_date}: {inc_raw_df.count():,}"
 
 
 # ============================================================
-# SILVER TRANSFORMATIONS (same logic as the original
-# full-load Silver script — re-derives LOS and status from dates
+# CELL 2 : SILVER TRANSFORMATIONS (re-derives LOS and status from dates
 # rather than trusting Bronze's version)
 # ============================================================
 silver_bed_df = (
@@ -72,7 +71,7 @@ silver_bed_df = (
 )
 
 # ============================================================
-# QUARANTINE SPLIT
+# CELL 3 : QUARANTINE SPLIT
 # ============================================================
 quarantine_df = silver_bed_df.filter(col("data_quality_flag").startswith("FAIL"))
 clean_df      = silver_bed_df.filter(~col("data_quality_flag").startswith("FAIL"))
@@ -88,7 +87,7 @@ print(f"⚠️  Quarantine records : {quarantine_df.count():,}")
 )
 
 # ============================================================
-# UPSERT INTO SILVER (plain merge on bed_allocation_id —
+# CELL 4 : UPSERT INTO SILVER (plain merge on bed_allocation_id —
 # same pattern as admission_discharge Silver, not SCD2)
 # ============================================================
 silver_delta = DeltaTable.forName(spark, silver_table)
