@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP
+# CELL 1 : SETUP
 # ============================================================
 %pip install faker
 
@@ -26,7 +26,7 @@ doctor_roster_df = spark.read.table("hospital_analytics.03_gold.dim_doctor").sel
 DOCTOR_IDS = [row["doctor_id"] for row in doctor_roster_df.collect()]
 
 # ============================================================
-# REFERENCE DATA (complete — network-wide ward
+# CELL 2 : REFERENCE DATA (complete — network-wide ward
 # capacities)
 # ============================================================
 FACILITIES = [
@@ -88,7 +88,7 @@ for w, c in WARD_CAPACITIES.items():
 
 
 # ============================================================
-# SEASONALITY 
+# CELL 3 : SEASONALITY 
 # ============================================================
 def random_date_with_seasonality(start_date, end_date, month_weights):
     days_list    = [start_date + timedelta(days=i)
@@ -106,7 +106,7 @@ MONTHLY_CAPS = {
 }
 
 # ============================================================
-# PHASE 1: Generate admission/discharge DATES
+# CELL 4 : PHASE 1: Generate admission/discharge DATES
 # ============================================================
 today_date     = date.today()
 ingestion_ts   = datetime.now()
@@ -180,7 +180,7 @@ print(f"✅ Generated {len(raw_events):,} admission date-ranges after {attempts:
 print(f"ℹ️  Still active as of today: {still_active_count:,} (was ~2,400 under the old logic — should be well under 392 total system capacity now)")
 
 # ============================================================
-# PHASE 2: Capacity-aware ward assignment
+# CELL 5 : PHASE 2: Capacity-aware ward assignment
 # Processes admissions in chronological order (by admission_date),
 # tracking active (undischarged) intervals per ward, and only
 # assigns a ward if it has capacity for the interval's duration.
@@ -249,7 +249,7 @@ for ward, (peak, cap) in max_overage.items():
 
 
 # ============================================================
-# PHASE 3: Fill in remaining fields & write to Bronze
+# CELL 6 : PHASE 3: Fill in remaining fields & write to Bronze
 # ============================================================
 admission_schema = StructType([
     StructField("admission_id",          StringType(),  False),
