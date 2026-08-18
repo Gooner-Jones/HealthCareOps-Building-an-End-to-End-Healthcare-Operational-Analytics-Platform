@@ -1,5 +1,5 @@
 # ============================================================
-# fact_bed_utilisation
+# CELL 1 : fact_bed_utilisation
 # ============================================================
 from pyspark.sql.functions import col, md5, date_format, when
 
@@ -37,7 +37,7 @@ fact_bed_utilisation.write.format("delta").mode("overwrite").option("overwriteSc
 print(f"✅ fact_bed_utilisation written: {fact_bed_utilisation.count():,} rows")
 
 # ============================================================
-# VALIDATE
+# CELL 2 : VALIDATE
 # ============================================================
 dim_ward     = spark.read.table("hospital_analytics.03_gold.dim_ward").select(col("ward_sk"))
 dim_facility = spark.read.table("hospital_analytics.03_gold.dim_facility").select(col("facility_sk"))
