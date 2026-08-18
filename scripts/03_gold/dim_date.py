@@ -1,5 +1,5 @@
 # ============================================================
-# dim_date — standard date dimension
+# CELL 1 : dim_date — standard date dimension
 # Spans 5 years back to 1 year forward from today, covers
 # all admission/discharge/assignment dates comfortably.
 # ============================================================
