@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP
+# CELL 1 : SETUP
 # ============================================================
 %pip install faker
 
@@ -20,7 +20,7 @@ random.seed(42)
 print("Setup complete.")
 
 # ============================================================
-# REFERENCE DATA 
+# CELL 2 : REFERENCE DATA 
 # ============================================================
 WARD_KEYS = [
     "Casualty", "ICU", "General Medical", "Surgical", "Paediatrics",
@@ -53,7 +53,7 @@ WARD_CAPACITIES = {
 SOURCE_SYSTEMS = ["MedTech EMR", "GoodX", "Healthware", "Nexus EMR", "Paper-Digitised"]
 
 # ============================================================
-# SCHEMA
+# CELL 3 : SCHEMA
 # ============================================================
 schema = StructType([
     StructField("bed_allocation_id",   StringType(),    False),
@@ -76,7 +76,8 @@ schema = StructType([
 ])
 
 # ============================================================
-# hospital_analytics.bronze.patient_infohospital_analytics.bronze.patient_infoREAD ADMISSIONS, GENERATE BED RECORDS, WRITE
+# CELL 4 : hospital_analytics.bronze.patient_infohospital_analytics.bronze.patient_info
+# READ ADMISSIONS, GENERATE BED RECORDS, WRITE
 # ============================================================
 adm_df = spark.read.format("delta").table("hospital_analytics.01_bronze.admission_discharge")
 adm_data = adm_df.select(
