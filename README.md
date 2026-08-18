@@ -146,7 +146,7 @@ Every dimension and fact table was validated immediately after creation via left
 📊 Power BI Report: Admissions Overview
 This page delivers a high-level view of patient flow, highlighting trends and resource demands across the hospital network.
 
-https://images/admissions_overview.png
+[https://images/admissions_overview.png](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/images/admission_overview.png)
 
 Key Metrics (Card Visuals):
 
