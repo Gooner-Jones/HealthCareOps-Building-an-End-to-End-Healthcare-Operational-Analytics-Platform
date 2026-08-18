@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP
+# CELL 1 : SETUP
 # ============================================================
 %pip install faker
 
@@ -20,7 +20,7 @@ random.seed(42)
 print("Setup complete.")
 
 # ============================================================
-# RESOURCE TYPES & REFERENCE DATA
+# CELL 2 : RESOURCE TYPES & REFERENCE DATA
 # ============================================================
 RESOURCE_TYPES = [
     # Beds & Accommodation
@@ -69,7 +69,7 @@ FACILITIES = [
 ]
 
 # ============================================================
-# SCHEMA (add facility_name field)
+# CELL 3 : SCHEMA (add facility_name field)
 # ============================================================
 schema = StructType([
     StructField("resource_id",            StringType(), False),
@@ -144,7 +144,7 @@ for _ in range(num_records):
 print(f"✅ Generated {len(data):,} records.")
 
 # ============================================================
-# CREATE DATAFRAME & WRITE TO UNITY CATALOG
+# CELL 5 : CREATE DATAFRAME & WRITE TO UNITY CATALOG
 # ============================================================
 df = spark.createDataFrame(data, schema=schema)
 
