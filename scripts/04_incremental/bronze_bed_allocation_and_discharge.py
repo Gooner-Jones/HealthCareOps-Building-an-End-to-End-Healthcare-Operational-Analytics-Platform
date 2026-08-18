@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ TODAY'S CHANGED ADMISSIONS
+# CELL 1 : SETUP & READ TODAY'S CHANGED ADMISSIONS
 # ============================================================
 from pyspark.sql.functions import col, lit
 from pyspark.sql.types import (
@@ -29,7 +29,7 @@ changed_admissions_df = (
 print(f"📥 Admissions changed today: {changed_admissions_df.count():,}")
 
 # ============================================================
-# REFERENCE DATA (matches original bed_allocation Bronze)
+# CELL 2 : REFERENCE DATA (matches original bed_allocation Bronze)
 # ============================================================
 BED_TYPES = {
     "ICU": "ICU Bed", "Casualty": "High Care Bed", "Maternity": "Maternity Bed",
@@ -48,7 +48,7 @@ WARD_CAPACITIES = {
 SOURCE_SYSTEMS = ["MedTech EMR", "GoodX", "Healthware", "Nexus EMR", "Paper-Digitised"]
 
 # ============================================================
-# PART 1: RELEASE BEDS FOR NEWLY DISCHARGED ADMISSIONS
+# CELL 3 : PART 1: RELEASE BEDS FOR NEWLY DISCHARGED ADMISSIONS
 # (MERGE update)
 # ============================================================
 delta_bed = DeltaTable.forName(spark, bronze_bed_table)
@@ -92,7 +92,7 @@ else:
     print("ℹ️  No beds to release today.")
 
 # ============================================================
-# PART 2: NEW BED ALLOCATIONS FOR NEW ADMISSIONS (append)
+# CELL 4 : PART 2: NEW BED ALLOCATIONS FOR NEW ADMISSIONS (append)
 # ============================================================
 new_admissions = changed_admissions_df.filter(col("discharge_date").isNull()).collect()
 print(f"🛏️  New admissions needing a bed: {len(new_admissions):,}")
