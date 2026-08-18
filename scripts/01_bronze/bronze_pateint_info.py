@@ -1,11 +1,5 @@
 # ============================================================
-# CELL 1 : Create a text widget for catalog name and retrieve its value
-# ============================================================
-dbutils.widgets.text("catalog_name", "hospital_analytics", "Catalog Name")
-catalog_name = dbutils.widgets.get("catalog_name")
-
-# ============================================================
-# CELL 2: SETUP
+# CELL 1: SETUP
 # ============================================================
 %pip install faker
 
@@ -29,7 +23,7 @@ spark.sql(f"USE CATALOG {catalog_name}")
 spark.sql(f"USE SCHEMA bronze")
 
 # ============================================================
-# CELL 3 : SA-SPECIFIC REFERENCE DATA 
+# CELL 2 : SA-SPECIFIC REFERENCE DATA 
 # ============================================================
 FACILITIES = [
     "Steve Biko Academic Hospital", "Kalafong Provincial Tertiary Hospital",
@@ -78,7 +72,7 @@ LANG_WEIGHTS = [0.255, 0.198, 0.127, 0.086, 0.092,
                 0.081, 0.071, 0.033, 0.023, 0.019, 0.015]
 
 # ============================================================
-# CELL 4 : DIAGNOSES, WARDS, ADMISSION TYPES 
+# CELL 3 : DIAGNOSES, WARDS, ADMISSION TYPES 
 # ============================================================
 DIAGNOSES = [
     "Hypertension", "Type 2 Diabetes Mellitus", "HIV/AIDS", "Tuberculosis (TB)",
@@ -99,7 +93,7 @@ ADMISSION_TYPES = ["Emergency", "Elective", "Maternity", "Referral", "Walk-in"]
 ADMISSION_WEIGHTS = [0.40, 0.25, 0.15, 0.12, 0.08]
 
 # ============================================================
-# CELL 5 : MEDICAL AID & PAYMENT
+# CELL 4 : MEDICAL AID & PAYMENT
 # ============================================================
 MEDICAL_AID_SCHEMES = [
     "Discovery Health", "GEMS", "Bonitas", "Momentum Health",
@@ -112,7 +106,7 @@ PAYMENT_TYPES = ["Medical Aid", "Private (Self-pay)", "Government (Public)", "RA
 PAYMENT_WEIGHTS = [0.30, 0.10, 0.45, 0.05, 0.10]
 
 # ============================================================
-# CELL 6 : HELPER FUNCTIONS 
+# CELL 5 : HELPER FUNCTIONS 
 # ============================================================
 def get_marital_status(age: int) -> str:
     if age < 18:
@@ -135,7 +129,7 @@ def generate_sa_id(birth_year: int, birth_month: int, birth_day: int, gender: st
     return f"{yy}{mm}{dd}{gender_digit}{seq:03d}08{random.randint(0,9)}"
 
 # ============================================================
-# CELL 7 : SCHEMA
+# CELL 6 : SCHEMA
 # ============================================================
 bronze_schema = StructType([
     StructField("patient_id",           StringType(),    False),
@@ -169,7 +163,7 @@ bronze_schema = StructType([
 ])
 
 # ============================================================
-# CELL 8 : GENERATE RECORDS
+# CELL 7 : GENERATE RECORDS
 # Note: 200,000 patients. If this runs slowly on Free Edition's
 # cluster, drop num_records to ~25,000-50,000 for iteration, then
 # scale back up once the pipeline is validated end to end.
@@ -239,7 +233,7 @@ for _ in range(num_records):
 print(f"Generated {num_records:,} records in memory.")
 
 # ============================================================
-# CELL 9 : CREATE DATAFRAME & WRITE TO UNITY CATALOG
+# CELL 8 : CREATE DATAFRAME & WRITE TO UNITY CATALOG
 # ============================================================
 df_bronze = spark.createDataFrame(data_bronze, schema=bronze_schema)
 
