@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP
+# CELL 1 : SETUP
 # ============================================================
 %pip install faker
 
@@ -18,18 +18,20 @@ Faker.seed(None)     # intentionally non-deterministic — new patients each run
 random.seed(None)
 
 # ============================================================
-# REFERENCE DATA & HELPERS
+# CELL 2 : REFERENCE DATA & HELPERS
 # ============================================================
 MALE_NAMES = ["Sipho","Thabo","Kagiso","Lerato","Tebogo","Bongani","Nkosinathi",
               "Siyanda","Mpho","Lwazi","Johan","Pieter","Heinrich","Rohan",
               "Aryan","Devon","Brandon","Neo","Tshepo","Thomas","Esau",
               "Thulani","Werner","Thabiso","Sudeshen","Alfred","Lehlogonlo",
               "Collen","Obed","Jabulani","Moses","Peet","Jan","Thato"]
+
 FEMALE_NAMES = ["Nomvula","Zanele","Thandiwe","Nompumelelo","Lerato","Ofentse","Boitumelo",
                 "Kelebogile","Noluthando","Ayanda","Thembi","Annelie","Marietjie",
                 "Fatima","Nadia","Candice","Cindy","Simone","Leani","Keamogetswe",
                 "Palesa","Kamogelo","Tshegofatso","Oreneilwe","Georginah","Asanda",
                 "Thuli","Thokozile","Venessa","Cathy","Keletso","Khomotso","Keabetswe"]
+
 SA_SURNAMES = ["Dlamini","Nkosi","Mokoena","Mahlangu","Ndlovu","Mthembu","Zulu",
                "Sithole","Molefe","Mabunda","Sibiya","Van der Merwe","Botha","Pretorius",
                "Du Plessis","Joubert","Naidoo","Pillay","Reddy","Adams","Hendricks",
@@ -38,6 +40,7 @@ SA_SURNAMES = ["Dlamini","Nkosi","Mokoena","Mahlangu","Ndlovu","Mthembu","Zulu",
 
 PAEDIATRIC_DIAGNOSES = ["Pneumonia","Acute Gastroenteritis","Asthma",
                          "Neonatal Jaundice","Anaemia","Sepsis","Malaria"]
+
 ADULT_DIAGNOSES = ["Hypertension","Type 2 Diabetes Mellitus","HIV/AIDS",
                     "Tuberculosis (TB)","Coronary Artery Disease","Stroke / CVA",
                     "Chronic Kidney Disease","Mental Health - Depression",
@@ -47,21 +50,28 @@ ADULT_DIAGNOSES = ["Hypertension","Type 2 Diabetes Mellitus","HIV/AIDS",
 
 DEMOGRAPHICS    = ["Black African","White","Coloured","Indian/Asian","Other"]
 DEMO_WEIGHTS    = [0.75, 0.15, 0.04, 0.04, 0.02]
+
 PAYMENT_TYPES   = ["Medical Aid","Private (Self-pay)","Government (Public)","RAF","Uninsured"]
 PAYMENT_WEIGHTS = [0.30, 0.10, 0.45, 0.05, 0.10]
+
 MEDICAL_AIDS    = ["Discovery Health","GEMS","Bonitas","Momentum Health",
                     "Medihelp","Fedhealth","Bestmed","Hosmed"]
+
 FACILITIES      = ["Steve Biko Academic Hospital","Kalafong Provincial Tertiary Hospital",
                     "Tshwane District Hospital","Unitas Hospital",
                     "Little Company of Mary Hospital","Netcare Montana Hospital",
                     "Mediclinic Kloof"]
+
 SA_LANGUAGES    = ["Zulu","Xhosa","Afrikaans","English","Sepedi","Setswana",
                     "Sesotho","Tsonga","Venda","Ndebele","Swati"]
 LANG_WEIGHTS    = [0.255, 0.198, 0.127, 0.086, 0.092, 0.081,
                     0.071, 0.033, 0.023, 0.019, 0.015]
+
 PROVINCES       = ["GP","GP","GP","GP","GP","LP","MP","NW","FS"]
+
 PRETORIA_AREAS  = ["Soshanguve","Mamelodi","Atteridgeville","Ga-Rankuwa","Centurion",
                     "Pretoria Central","Hatfield","Menlyn","Silverton","Mabopane"]
+
 SOURCE_SYSTEMS  = ["MedTech EMR","GoodX","Healthware","Nexus EMR","Paper-Digitised"]
 
 def get_marital_status(age: int) -> str:
@@ -94,7 +104,7 @@ except Exception:
     print("ℹ️  province column already exists — skipping.")
 
 # ============================================================
-# BRONZE SCHEMA & READ EXISTING PATIENTS
+# CELL 3 : BRONZE SCHEMA & READ EXISTING PATIENTS
 # ============================================================
 bronze_schema = StructType([
     StructField("patient_id",           StringType(),    False),
@@ -155,7 +165,7 @@ except Exception as e:
     existing_patient_ids  = []
 
 # ============================================================
-# GENERATE INCREMENTAL RECORDS (20% updates, 80% inserts)
+# CELL 4 : GENERATE INCREMENTAL RECORDS (20% updates, 80% inserts)
 # ============================================================
 num_records      = 5_000
 num_updates      = int(0.2 * num_records)
@@ -247,7 +257,7 @@ for _ in range(num_inserts):
     })
 
 # ============================================================
-# WRITE (APPEND) TO BRONZE
+# CELL 5 : WRITE (APPEND) TO BRONZE
 # ============================================================
 inc_df = spark.createDataFrame(incremental_data, schema=bronze_schema)
 
