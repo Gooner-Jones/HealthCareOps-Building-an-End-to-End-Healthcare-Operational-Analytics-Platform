@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP
+# CELL 1 : SETUP
 # ============================================================
 %pip install faker
 
@@ -21,7 +21,7 @@ ingestion_ts   = datetime.now()
 ingestion_date = ingestion_ts.date()
 
 # ============================================================
-# REFERENCE DATA (matches original Bronze generator)
+# CELL 2 : REFERENCE DATA (matches original Bronze generator)
 # ============================================================
 FACILITIES = [
     "Steve Biko Academic Hospital", "Kalafong Provincial Tertiary Hospital",
@@ -60,7 +60,7 @@ patient_dict = {row["patient_id"]: row["primary_diagnosis"] for row in patient_d
 patient_ids  = list(patient_dict.keys())
 
 # ============================================================
-# PART 1: DISCHARGE A PORTION OF CURRENTLY ACTIVE ADMISSIONS
+# CELL 3 : PART 1: DISCHARGE A PORTION OF CURRENTLY ACTIVE ADMISSIONS
 # (MERGE update — this is the CDC-style lifecycle change)
 # ============================================================
 delta_bronze = DeltaTable.forName(spark, bronze_admission_table)
@@ -131,7 +131,7 @@ else:
     print("ℹ️  No active admissions were discharged today.")
 
 # ============================================================
-# ADD to incremental_bronze_admission_discharge, before Cell 4
+# CELL 4 : ADD to incremental_bronze_admission_discharge,
 # (new admissions section) — capacity-aware ward assignment
 # ============================================================
 WARD_CAPACITIES = {
@@ -163,7 +163,7 @@ def assign_ward_with_capacity():
     return chosen
 
 # ============================================================
-# PART 2: NEW ADMISSIONS (append)
+# CELL 5 : PART 2: NEW ADMISSIONS (append)
 # ============================================================
 NUM_NEW_ADMISSIONS = 300
 
@@ -228,7 +228,7 @@ for _ in range(min(NUM_NEW_ADMISSIONS, len(eligible_patients))):
 print(f"✅ Generated {len(new_admissions):,} new admissions.")
 
 # ============================================================
-# WRITE (APPEND) NEW ADMISSIONS TO BRONZE
+# CELL 6 : WRITE (APPEND) NEW ADMISSIONS TO BRONZE
 # ============================================================
 if new_admissions:
     # Use the Bronze table schema to handle nullable columns with all None values
