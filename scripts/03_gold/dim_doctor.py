@@ -1,5 +1,5 @@
 # ============================================================
-# BUILD dim_doctor (fixed roster, not random-per-record)
+# CELL 1 : BUILD dim_doctor (fixed roster, not random-per-record)
 # ============================================================
 import random
 from pyspark.sql.functions import col, md5
