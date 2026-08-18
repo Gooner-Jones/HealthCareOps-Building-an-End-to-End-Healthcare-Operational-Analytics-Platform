@@ -1,5 +1,5 @@
 # ============================================================
-# dim_payment
+# CELL 1 : dim_payment
 # ============================================================
 from pyspark.sql.functions import col, md5, when
 
@@ -29,7 +29,7 @@ print(f"✅ dim_payment written: {dim_payment.count()} payment types")
 dim_payment.show(truncate=False)
 
 # ============================================================
-# VALIDATE dim_payment against patient_info Silver
+# CELL 2 : VALIDATE dim_payment against patient_info Silver
 # ============================================================
 dim_payment_check = spark.read.table("hospital_analytics.03_gold.dim_payment")
 
