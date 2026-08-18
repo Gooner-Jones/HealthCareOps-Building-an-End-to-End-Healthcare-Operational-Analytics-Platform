@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
+# CELL 1 : SETUP & READ TODAY'S INCREMENTAL BRONZE RECORDS
 # ============================================================
 from pyspark.sql.functions import (
     col, lit, current_date, when,
@@ -27,7 +27,7 @@ except Exception:
     print("ℹ️  province columns already exist — skipping.")
 
 # ============================================================
-# SILVER TRANSFORMATION
+# CELL 2 : SILVER TRANSFORMATION
 # (fixed: marital status correction now uses a per-row rand()
 # column instead of a single Python random.choices() call)
 # ============================================================
@@ -132,7 +132,7 @@ transformed_df = (
 )
 
 # ============================================================
-# SCHEMA ALIGNMENT CHECK
+# CELL 3 : SCHEMA ALIGNMENT CHECK
 # ============================================================
 silver_cols   = set(spark.read.format("delta").table(silver_table).columns)
 incoming_cols = set(transformed_df.columns)
@@ -151,7 +151,7 @@ print("✅ Schemas aligned — safe to proceed.")
 
 
 # ============================================================
-# SCD TYPE 2 MERGE
+# CELL 4 : SCD TYPE 2 MERGE
 # ============================================================
 silver_df = (
     spark.read.format("delta").table(silver_table)
