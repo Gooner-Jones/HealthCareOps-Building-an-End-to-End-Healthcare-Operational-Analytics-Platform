@@ -1,5 +1,5 @@
 # ============================================================
-# UPDATE dim_ward with network-wide capacity values
+# CELL 1 : dim_ward with network-wide capacity values
 # (self-contained — doesn't depend on any other notebook's session)
 # ============================================================
 from pyspark.sql.functions import col, md5
