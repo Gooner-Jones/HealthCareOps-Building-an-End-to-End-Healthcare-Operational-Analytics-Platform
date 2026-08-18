@@ -228,7 +228,7 @@ Patient Marital Status: The majority of patients are Married (approx. 6K), follo
 
 Patient Age Distribution: The patient population is relatively evenly distributed across age bands, with a slight concentration in the 50-59 and 60-69 age groups.
 
-## Natural-Language Querying with Databricks Genie
+## 🤖 Natural-Language Querying with Databricks Genie
 
 ### Why Genie Instead of Fabric Data Agents
 
@@ -249,7 +249,7 @@ A set of example questions was also seeded to ground the agent's behaviour, cove
 
 Rather than trusting natural-language answers at face value, testing specifically targeted the trickiest instruction first — the ward-grouped occupancy rate calculation — since it requires a join plus a division rather than a simple aggregate, making it the best early signal of whether the agent was genuinely applying instructions rather than pattern-matching on table names. Genie's generated SQL was also inspected directly for questions involving the public/private facility classification, to confirm it was querying `facility_type` (the correct column per the instructions) rather than the more general `sector` field.
 
-Genie chat output: [https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
+🤖 Genie chat output: [https://Genie_Diagnosis_Groups.jpg](https://github.com/Gooner-Jones/HealthCareOps-Building-an-End-to-End-Healthcare-Operational-Analytics-Platform/blob/main/Genie_Diagnosis_Groups.pdf)
 
 ### Note: The Genie Agent is explicitly instructed to state that all data is synthetic, ensuring the generated insights are not misrepresented as real-world health statistics.
 
