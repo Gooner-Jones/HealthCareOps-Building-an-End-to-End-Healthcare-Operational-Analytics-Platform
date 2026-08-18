@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ BRONZE
+# CELL 1 : SETUP & READ BRONZE
 # ============================================================
 from pyspark.sql.functions import (
     col, when, trim, datediff, current_date
@@ -8,7 +8,7 @@ from pyspark.sql.functions import (
 bronze_bed_df = spark.read.format("delta").table("hospital_analytics.01_bronze.bed_allocation")
 
 # ============================================================
-# QUARANTINE SPLIT & WRITE
+# CELL 2 : QUARANTINE SPLIT & WRITE
 # ============================================================
 quarantine_df = silver_bed_df.filter(col("data_quality_flag").startswith("FAIL"))
 clean_df      = silver_bed_df.filter(~col("data_quality_flag").startswith("FAIL"))
