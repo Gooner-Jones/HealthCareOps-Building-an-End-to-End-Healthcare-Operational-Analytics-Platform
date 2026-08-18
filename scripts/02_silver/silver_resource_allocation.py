@@ -1,5 +1,5 @@
 # ============================================================
-# SETUP & READ BRONZE
+# CELL 1 : SETUP & READ BRONZE
 # ============================================================
 from pyspark.sql.functions import (
     col, when, trim, datediff, current_date, lit
@@ -8,7 +8,7 @@ from pyspark.sql.functions import (
 bronze_res_df = spark.read.format("delta").table("hospital_analytics.01_bronze.resource_allocation")
 
 # ============================================================
-# RESOURCE CATEGORY MAPPING
+# CELL 2 : RESOURCE CATEGORY MAPPING
 # (derived from the six groupings used in Bronze generation)
 # ============================================================
 RESOURCE_CATEGORY_MAP = {
@@ -17,6 +17,7 @@ RESOURCE_CATEGORY_MAP = {
     "High Care Bed": "Beds & Accommodation", "Maternity Bed": "Beds & Accommodation",
     "Paediatric Bed": "Beds & Accommodation", "Isolation Bed": "Beds & Accommodation",
     "Day Ward Bed": "Beds & Accommodation",
+    
     # Medical Equipment
     "Ventilator": "Medical Equipment", "ECG Machine": "Medical Equipment",
     "Ultrasound Machine": "Medical Equipment", "X-Ray Machine": "Medical Equipment",
@@ -25,20 +26,24 @@ RESOURCE_CATEGORY_MAP = {
     "Dialysis Machine": "Medical Equipment", "Pulse Oximeter": "Medical Equipment",
     "Blood Glucose Monitor": "Medical Equipment", "Anaesthesia Machine": "Medical Equipment",
     "Surgical Lamp": "Medical Equipment", "Endoscope": "Medical Equipment",
+    
     # Staff
     "Specialist Doctor": "Staff", "Medical Officer": "Staff", "Intern Doctor": "Staff",
     "Registered Nurse": "Staff", "Enrolled Nurse": "Staff", "Scrub Nurse": "Staff",
     "ICU Nurse": "Staff", "Midwife": "Staff", "Paramedic": "Staff",
     "Radiographer": "Staff", "Pharmacist": "Staff", "Physiotherapist": "Staff",
     "Occupational Therapist": "Staff", "Social Worker": "Staff", "Dietician": "Staff",
+    
     # Theatre & Surgical
     "Operating Theatre": "Theatre & Surgical", "Surgical Instrument Set": "Theatre & Surgical",
     "Laparoscopic Equipment": "Theatre & Surgical", "Orthopaedic Drill Set": "Theatre & Surgical",
+    
     # Pharmacy & Consumables
     "Blood Unit (O+)": "Pharmacy & Consumables", "Blood Unit (A+)": "Pharmacy & Consumables",
     "Blood Unit (B+)": "Pharmacy & Consumables", "Blood Unit (AB+)": "Pharmacy & Consumables",
     "IV Fluid Stock": "Pharmacy & Consumables", "PPE Stock": "Pharmacy & Consumables",
     "Sterile Dressing Pack": "Pharmacy & Consumables",
+    
     # Support & Logistics
     "Ambulance": "Support & Logistics", "Patient Transport Wheelchair": "Support & Logistics",
     "Patient Transport Stretcher": "Support & Logistics", "Mortuary Bay": "Support & Logistics",
@@ -53,7 +58,7 @@ for resource_type, category in RESOURCE_CATEGORY_MAP.items():
 mapping_expr = mapping_expr.otherwise("Uncategorised")
 
 # ============================================================
-# SILVER TRANSFORMATIONS
+# CELL 3 : SILVER TRANSFORMATIONS
 # ============================================================
 silver_res_df = (
     bronze_res_df
@@ -108,7 +113,7 @@ silver_res_df = (
 silver_res_df = silver_res_df.dropDuplicates(["resource_id"])
 
 # ============================================================
-# QUARANTINE SPLIT & WRITE
+# CELL 4 : QUARANTINE SPLIT & WRITE
 # ============================================================
 quarantine_df = silver_res_df.filter(col("data_quality_flag").startswith("FAIL"))
 clean_df      = silver_res_df.filter(~col("data_quality_flag").startswith("FAIL"))
@@ -135,7 +140,7 @@ print(f"⚠️  Quarantine records : {quarantine_df.count():,}")
 print(f"✅ hospital_analytics.02_silver.resource_allocation written")
 
 # ============================================================
-# VALIDATE dim_facility against resource_allocation Silver
+# CELL 5 : VALIDATE dim_facility against resource_allocation Silver
 # ============================================================
 from pyspark.sql.functions import col, md5
 
