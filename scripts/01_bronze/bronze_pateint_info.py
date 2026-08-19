@@ -243,9 +243,9 @@ df_bronze.write
     .mode("overwrite")
     .partitionBy("ingestion_date")
     .option("overwriteSchema", "true")
-    .saveAsTable("hospital_analytics.bronze.patient_info")
+    .saveAsTable("hospital_analytics.01_bronze.patient_info")
 )
 
-print(f"✅ hospital_analytics.bronze.patient_info loaded: {num_records:,} records | {ingestion_date}")
+print(f"✅ hospital_analytics.01_bronze.patient_info loaded: {num_records:,} records | {ingestion_date}")
 
 print("Setup complete.")
