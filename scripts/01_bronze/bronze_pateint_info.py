@@ -18,9 +18,9 @@ Faker.seed(42)
 random.seed(42)
 
 spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.bronze")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.01_bronze")
 spark.sql(f"USE CATALOG {catalog_name}")
-spark.sql(f"USE SCHEMA bronze")
+spark.sql(f"USE SCHEMA 01_bronze")
 
 # ============================================================
 # CELL 2 : SA-SPECIFIC REFERENCE DATA 
