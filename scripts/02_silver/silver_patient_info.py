@@ -8,7 +8,7 @@ from pyspark.sql.functions import (
     to_date, datediff, floor
 )
 
-spark.sql("CREATE SCHEMA IF NOT EXISTS hospital_analytics.silver")
+spark.sql("CREATE SCHEMA IF NOT EXISTS hospital_analytics.02_silver")
 spark.sql("CREATE SCHEMA IF NOT EXISTS hospital_analytics.quarantine")
 
 print("Setup complete.")
@@ -16,10 +16,10 @@ print("Setup complete.")
 # ============================================================
 # CELL 2 : READ BRONZE
 # ============================================================
-bronze_table = "hospital_analytics.bronze.patient_info"
-silver_table = "hospital_analytics.silver.patient_info"
+bronze_table = "hospital_analytics.01_bronze.patient_info"
+silver_table = "hospital_analytics.02_silver.patient_info"
 
-bronze_df = spark.read.format("delta").table(bronze_table)
+bronze_df = spark.read.format("delta").table(01_bronze_table)
 
 # ============================================================
 # CELL 3 : SILVER TRANSFORMATIONS
@@ -137,10 +137,10 @@ print(f"⚠️  Quarantine records : {quarantine_df.count():,}")
 # ============================================================
 # CELL 4 : READ BRONZE
 # ============================================================
-bronze_table = "hospital_analytics.bronze.patient_info"
-silver_table = "hospital_analytics.silver.patient_info"
+bronze_table = "hospital_analytics.01_bronze.patient_info"
+silver_table = "hospital_analytics.02_silver.patient_info"
 
-bronze_df = spark.read.format("delta").table(bronze_table)
+bronze_df = spark.read.format("delta").table(01_bronze_table)
 
 # ============================================================
 # CELL 5 : WRITE QUARANTINE & SILVER TABLES
